@@ -15,7 +15,7 @@ sortYen: 1430
 points:
   - "特典：新規登録で約1,430円相当のポイント"
   - "条件：紹介リンクから登録し、対象ゲームをプレイ"
-image: "https://coolcoolcoolcool161-a11y.github.io/mea-poikatsu-blog/images/banner-freecash.jpg"
+image: "https://mea-poikatsu.github.io/mea-poikatsu-blog/images/banner-freecash.jpg"
 conditions: "紹介リンクから新規登録し、対象ゲームをプレイして条件を達成すると約1,430円相当がもらえます。"
 ---
 

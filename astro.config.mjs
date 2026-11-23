@@ -16,7 +16,7 @@ for (const name of readdirSync(articlesDir)) {
 }
 
 export default defineConfig({
-  site: 'https://coolcoolcoolcool161-a11y.github.io',
+  site: 'https://mea-poikatsu.github.io',
   base: '/mea-code-matome',
   trailingSlash: 'always',
   integrations: [

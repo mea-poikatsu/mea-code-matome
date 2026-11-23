@@ -3,16 +3,16 @@
 export const SITE = {
   name: '紹介コードまとめブログ',
   operator: 'メア',
-  siteUrl: 'https://coolcoolcoolcool161-a11y.github.io/mea-code-matome',
+  siteUrl: 'https://mea-poikatsu.github.io/mea-code-matome',
   description:
     'ポイ活の紹介コード・招待コードを19サービス分まとめて掲載。ワラウ最大2,500pt、ハピタス最大2,300P、モッピー最大7,000P、TikTok・TikTok Lite、PayPay、メルカリ、エアウォレット、楽天モバイル、オリくじ、ポケカツ、Freecash、SMBC Olive、Muse、サンポ、ぶたまる、ミラポイ、トクエル、dipsファームの特典・条件・紹介リンクを一覧で比較。コードはコピーボタンでそのまま使えます。',
   dateModified: '2026-11-21',
   gaMeasurementId: 'G-8BB8V3DRW8',
   xAccount: 'https://x.com/pppppuririn',
   hubUrl:
-    'https://coolcoolcoolcool161-a11y.github.io/mea-poikatsu-media/',
+    'https://mea-poikatsu.github.io/mea-poikatsu-media/',
   // みんなの紹介コード掲示板（公開中）
-  boardUrl: 'https://coolcoolcoolcool161-a11y.github.io/mea-keijiban/',
+  boardUrl: 'https://mea-poikatsu.github.io/mea-keijiban/',
 } as const;
 
 // Astro 5ではcontent collectionのentry.idに拡張子（.md）が付くため、URL用スラッグに変換する
@@ -61,32 +61,32 @@ export const SISTER_BLOGS = [
   {
     name: 'ポイ活ブログ',
     note: 'ランキングや特集が充実した総合版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-poikatsu-blog/',
+    url: 'https://mea-poikatsu.github.io/mea-poikatsu-blog/',
   },
   {
     name: 'おすすめ紹介コード',
     note: 'メアのおすすめ順に並べた紹介コード版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-ranking/',
+    url: 'https://mea-poikatsu.github.io/mea-ranking/',
   },
   {
     name: 'ポイ活コード検索',
     note: 'サービス名で検索してすぐ探せる検索版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-code-search/',
+    url: 'https://mea-poikatsu.github.io/mea-code-search/',
   },
   {
     name: 'ポイ活マガジン',
     note: '読み物スタイルでじっくり紹介する雑誌版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-poikatsu-magazine/',
+    url: 'https://mea-poikatsu.github.io/mea-poikatsu-magazine/',
   },
   {
     name: 'かんたん紹介コード案内',
     note: '大きな文字で分かりやすく案内するかんたん版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-kantan-guide/',
+    url: 'https://mea-poikatsu.github.io/mea-kantan-guide/',
   },
   {
     name: 'ゲームポイ活ブログ',
     note: 'ゲームで貯める案件に特化した版',
-    url: 'https://coolcoolcoolcool161-a11y.github.io/mea-game-poikatsu/',
+    url: 'https://mea-poikatsu.github.io/mea-game-poikatsu/',
   },
 ] as const;
 

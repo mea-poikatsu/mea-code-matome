@@ -45,6 +45,6 @@
 
 ## プッシュ
 
-- `github push-files --owner coolcoolcoolcool161-a11y --repo mea-code-matome --branch main --message "紹介コードまとめブログ Astro版 初回コミット" --source-dir ~/workspace/site-migration/poikatsu-code-matome --paths-file ~/workspace/site-migration/work/poikatsu-code-matome-paths-textonly.txt`
+- `github push-files --owner mea-poikatsu --repo mea-code-matome --branch main --message "紹介コードまとめブログ Astro版 初回コミット" --source-dir ~/workspace/site-migration/poikatsu-code-matome --paths-file ~/workspace/site-migration/work/poikatsu-code-matome-paths-textonly.txt`
 - 手順書 `/opt/hatch/connectors/github/references/snapshot-push.md` に従うこと。プッシュ前に `list_commits` でリポジトリが空（409 Git Repository is empty）であることを確認し、プッシュ直前にも再確認すること。
 - 同期記録は `~/workspace/site-migration/poikatsu-code-matome.muse-github-snapshot-sync.json` に保存する。

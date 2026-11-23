@@ -13,7 +13,7 @@ sortYen: 13000
 points:
   - "特典：MNP 13,000ポイント／非MNP 12,000ポイント"
   - "条件：初めてのお申し込み限定（紹介リンク型）"
-image: "https://coolcoolcoolcool161-a11y.github.io/mea-poikatsu-blog/images/banner-rakuten.jpg"
+image: "https://mea-poikatsu.github.io/mea-poikatsu-blog/images/banner-rakuten.jpg"
 conditions: "初めての申込が対象です。他社から乗り換え（MNP）なら13,000ポイント、乗り換え以外なら12,000ポイントです。"
 ---
 
