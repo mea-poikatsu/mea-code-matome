@@ -35,18 +35,18 @@ export const CATEGORY_NAMES: Record<string, string> = Object.fromEntries(
 // 旧サイトの一覧表の並び（ワラウ→ハピタス→モッピー→TikTok→TikTok Lite→PayPay→メルカリ→エアウォレット→楽天モバイル→オリくじ→ポケカツ→Freecash→Olive→Muse→サンポ→ぶたまる→ミラポイ→トクエル→dips）
 // 注：旧サイトの一覧表にはMuseの行がなかった（18行）が、カードとJSON-LDにはMuseが含まれていたため、新サイトの一覧表にはMuseを含めた19行にしている。
 export const MATOME_ORDER = [
+  'freecash',
   'warau',
-  'hapitas',
-  'moppy',
   'tiktok',
   'tiktok-lite',
+  'moppy',
+  'hapitas',
   'paypay',
   'mercari',
   'airwallet',
   'rakuten-mobile',
   'orikuji',
   'pokekatsu',
-  'freecash',
   'olive',
   'muse',
   'sampo',

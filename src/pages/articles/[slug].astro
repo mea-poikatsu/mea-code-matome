@@ -69,7 +69,7 @@ const jsonLd = {
     <p class="breadcrumb"><a href="/mea-code-matome/">トップ</a> › <a href={`/mea-code-matome/categories/${data.category}/`}>{CATEGORY_NAMES[data.category] ?? data.category}</a> › {data.service}</p>
 
     <h1>{data.title}</h1>
-    <p class="article-meta">最終更新：{data.dateModified}｜運営者：{SITE.operator}</p>
+    <p class="article-meta">最終更新：{data.dateModified}{data.verified ? `｜最終確認日：${data.verified}（公式情報）` : ''}｜運営者：{SITE.operator}</p>
     <p class="article-pr">PR｜この記事には紹介リンク・紹介コードを含みます。条件を満たすと紹介者に報酬が支払われる場合があります（利用する方の特典は減りません）。</p>
 
     <AdSlot position="top" />
