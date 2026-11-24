@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import rehypeSponsored from '../../../rehype-sponsored.mjs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
@@ -16,7 +17,7 @@ const { data } = article;
 
 // 記事本文の中段に忍者AdMaxの中段枠（position="middle"）を差し込む（2026-11-21 ユーザー決定）。
 // 本文Markdown自体は変更せず、「## 」見出しセクションの半分を過ぎた最初の見出しの直前で分割して描画する。
-const mdProcessor = await createMarkdownProcessor({});
+const mdProcessor = await createMarkdownProcessor({ rehypePlugins: [rehypeSponsored] });
 const bodyLines = (article.body ?? '').split('\n');
 const headingLineIdxs = bodyLines.map((l, i) => (l.startsWith('## ') ? i : -1)).filter((i) => i >= 0);
 let bodyFirst = article.body ?? '';

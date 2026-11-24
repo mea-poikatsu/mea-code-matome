@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import rehypeSponsored from './rehype-sponsored.mjs';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -19,6 +20,10 @@ export default defineConfig({
   site: 'https://mea-poikatsu.github.io',
   base: '/mea-code-matome',
   trailingSlash: 'always',
+  markdown: {
+    // 本文中の外部ドメインリンクへ rel="sponsored nofollow" を自動付与（開示ページの記載と実態を一致させる）
+    rehypePlugins: [rehypeSponsored],
+  },
   integrations: [
     sitemap({
       serialize(item) {
