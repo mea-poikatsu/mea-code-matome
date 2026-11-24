@@ -11,7 +11,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description = SITE.description, canonicalPath = '/', ogImage = '/images/hero.jpg', jsonLd, noindex = false } = Astro.props;
+const { title, description = SITE.description, canonicalPath = '/', ogImage = '/images/ogp.jpg', jsonLd, noindex = false } = Astro.props;
 const canonical = SITE.siteUrl + canonicalPath;
 const ogImageUrl = SITE.siteUrl + ogImage;
 const organizationLd = {
