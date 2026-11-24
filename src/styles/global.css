@@ -20,7 +20,8 @@
   --color-error-text: #b3261e;
   --color-board: #7c5cbf;
   --color-focus: #c2185b;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", YuGothic, sans-serif;
+  --font-sans: "LINE Seed JP", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", YuGothic, sans-serif;
+  --font-heading: "Zen Maru Gothic", "LINE Seed JP", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
   --font-code: "SF Mono", Menlo, Consolas, monospace;
   --text-xs: 0.8rem;
   --text-sm: 0.9rem;
@@ -68,7 +69,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-family: var(--font-sans);
   color: var(--ink);
   background: var(--bg);
   line-height: 1.75;
@@ -443,3 +444,8 @@ tbody tr:hover { background: #fff0f5; }
 /* カード内・FAQ内の h2 は見出し装飾を持たない小見出しとして扱う（階層統一のため h2 化した箇所） */
 .service-card h2 { font-size: 1.15rem; margin: 0; border-bottom: none; padding-bottom: 0; background: none; line-height: var(--leading-heading); }
 .faq-item h2 { font-size: var(--text-h3); margin: 0 0 6px; border-bottom: none; padding-bottom: 0; background: none; line-height: var(--leading-heading); }
+
+/* フォント標準（2026-11-24改訂・根拠: ~/workspace/fonts/FONT_RESEARCH_2026-11-24.md）
+   本文 = LINE Seed JP（Webフォント）/ 見出し = 丸ゴシック系（S07のみ角ゴシック） */
+h1, h2, h3, .brand { font-family: var(--font-heading); }
+h1, .brand { font-weight: 900; }
