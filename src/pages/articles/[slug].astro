@@ -6,6 +6,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import { SITE, CATEGORY_NAMES, slugOf } from '../../data/site';
+import { factsOf } from '../../data/services';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -14,6 +15,11 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { data } = article;
+// 特典・コード・紹介URLは正本（services-data.json）を優先表示する（frontmatterは表記差異が残るため）
+const facts = factsOf(slugOf(article.id));
+const dispBenefit = facts?.benefit ?? data.benefit;
+const dispCode = facts ? facts.code : data.code;
+const dispUrl = facts ? facts.url : data.url;
 
 // 記事本文の中段に忍者AdMaxの中段枠（position="middle"）を差し込む（2026-11-21 ユーザー決定）。
 // 本文Markdown自体は変更せず、「## 」見出しセクションの半分を過ぎた最初の見出しの直前で分割して描画する。
@@ -87,12 +93,12 @@ const jsonLd = {
       <h2>{data.service}の特典と紹介コード</h2>
       <div class="benefit-badge">
         <span class="benefit-label">登録者特典</span>
-        <span class="benefit-value">{data.benefit}</span>
+        <span class="benefit-value">{dispBenefit}</span>
       </div>
-      {data.code ? (
+      {dispCode ? (
         <div class="code-row">
-          <code>{data.code}</code>
-          <button class="copy-btn" type="button" data-copy={data.code} data-service={slugOf(article.id)}>
+          <code>{dispCode}</code>
+          <button class="copy-btn" type="button" data-copy={dispCode} data-service={slugOf(article.id)}>
             <span class="copy-label">コピー</span>
           </button>
         </div>
@@ -104,8 +110,8 @@ const jsonLd = {
       ) : (
         <p class="conditions">条件・注意事項は上の記事本文で確認してから登録してください。</p>
       )}
-      {data.url ? (
-        <a class="register-btn" href={data.url} target="_blank" rel="sponsored noopener" data-service={slugOf(article.id)} data-position="article_bottom">
+      {dispUrl ? (
+        <a class="register-btn" href={dispUrl} target="_blank" rel="sponsored noopener" data-service={slugOf(article.id)} data-position="article_bottom" data-ref-service={slugOf(article.id)} data-ref-placement="article_bottom">
           無料で登録する
         </a>
       ) : data.officialSite ? (
@@ -130,7 +136,7 @@ const jsonLd = {
       <h3>ほかのサービスも見る</h3>
       <ul>
         {others.map((a) => (
-          <li><a href={`/mea-code-matome/articles/${slugOf(a.id)}/`}>{a.data.service}の紹介コード {a.data.code ?? ''}</a>（{a.data.benefit}）</li>
+          <li><a href={`/mea-code-matome/articles/${slugOf(a.id)}/`}>{a.data.service}の紹介コード {factsOf(slugOf(a.id))?.code ?? a.data.code ?? ''}</a>（{factsOf(slugOf(a.id))?.benefit ?? a.data.benefit}）</li>
         ))}
       </ul>
       <p><a href="/mea-code-matome/">トップへ戻る →</a></p>

@@ -75,9 +75,9 @@ const organizationLd = {
         <a class="brand" href="/mea-code-matome/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span> {SITE.name}｜紹介コード特集号</a>
         <nav class="main-nav" aria-label="メインナビゲーション">
           <a href="/mea-code-matome/">トップ</a>
-          <a href="/mea-code-matome/#summary">特典まとめ一覧</a>
+          <a href="/mea-code-matome/#specimens">標本グリッド</a>
           <a href="/mea-code-matome/#board">みんなの掲示板</a>
-          <a href="/mea-code-matome/#point-sites">サービス一覧</a>
+          <a href="/mea-code-matome/#howto">使い方</a>
           <a href="/mea-code-matome/#faq">よくある質問</a>
           <a href="/mea-code-matome/search/">検索</a>
           <a href="/mea-code-matome/faq/">よくある質問</a>
@@ -109,7 +109,7 @@ const organizationLd = {
         const p = location.pathname;
         if (p.includes('/articles/')) return 'article';
         if (p.includes('/service/')) return 'board';
-        if (p === '/mea-poikatsu-media/') return 'hub';
+        if (p === '/mea-code-matome/') return 'top';
         return 'card';
       })();
       const gaServiceFromPath = () => {
@@ -128,8 +128,14 @@ const organizationLd = {
           if (href.includes('mea-keijiban')) {
             sendGaEvent('board_click', { from_site: location.hostname });
           }
+          // 紹介リンクのクリック計測（再構築計画の計測基盤）：data-ref-service を持つ外部紹介リンクのみ対象。
+          // パラメータは service／placement／site_id。紹介先URL自体は変更しない。内部リンクには付けない。
+          const refService = anchor.getAttribute('data-ref-service');
+          if (refService) {
+            sendGaEvent('referral_click', { service: refService, placement: anchor.getAttribute('data-ref-placement') || '', site_id: 's08' });
+          }
           const relTokens = (anchor.getAttribute('rel') || '').split(/\s+/);
-          if (relTokens.includes('sponsored')) {
+          if (!refService && relTokens.includes('sponsored')) {
             sendGaEvent('referral_click', { service: anchor.getAttribute('data-service') || gaServiceFromPath(), page_type: gaPageType });
           }
           if (anchor.classList.contains('register-btn') || anchor.classList.contains('btn-primary')) {

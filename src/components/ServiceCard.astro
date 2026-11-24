@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { CATEGORY_NAMES, slugOf } from '../data/site';
+import { factsOf } from '../data/services';
 
 interface Props {
   article: CollectionEntry<'articles'>;
@@ -16,12 +17,17 @@ const HeadingTag = headingLevel === 2 ? 'h2' : 'h3';
 const { data } = article;
 const { Content } = await render(article);
 const slug = slugOf(article.id);
+// 特典・コード・紹介URLは正本（services-data.json）を優先表示する（frontmatterは表記差異が残るため）
+const facts = factsOf(slug);
+const dispBenefit = facts?.benefit ?? data.benefit;
+const dispCode = facts ? facts.code : data.code;
+const dispUrl = facts ? facts.url : data.url;
 const articleUrl = `/mea-code-matome/articles/${slug}/`;
 const IMG_DIMS: Record<string, [number, number]> = {"/images/banner-muse.jpg": [2400, 800], "/images/banner-hapitas.jpg": [561, 129], "/images/banner-moppy.jpg": [234, 60], "/images/banner-warau.jpg": [234, 60], "/images/hero.jpg": [1179, 393], "https://mea-poikatsu.github.io/mea-poikatsu-blog/images/banner-rakuten.jpg": [2400, 800], "https://mea-poikatsu.github.io/mea-poikatsu-blog/images/banner-tiktok.jpg": [2400, 800], "https://mea-poikatsu.github.io/mea-poikatsu-blog/images/banner-freecash.jpg": [2400, 800], "/images/banner-orikuji.jpg": [2400, 800], "/images/banner-pokekatsu.jpg": [2400, 800], "/images/banner-tiktok-lite.jpg": [2400, 800], "/images/banner-paypay.jpg": [2400, 800], "/images/banner-airwallet.jpg": [2400, 800], "/images/banner-olive.jpg": [2400, 800], "/images/banner-sampo.jpg": [2400, 800], "/images/banner-butamaru.jpg": [2400, 800], "/images/banner-mirapoi.jpg": [2400, 800], "/images/banner-tokueru.jpg": [2400, 800], "/images/banner-dips.jpg": [2400, 800]};
 const imgSize = data.image ? IMG_DIMS[data.image] : undefined;
 ---
 
-<article class="service-card" id={slug} data-category={data.category} data-service={data.service} data-code={data.code ?? ''} data-benefit={data.benefit} data-sort-yen={data.sortYen ?? 0}>
+<article class="service-card" id={slug} data-category={data.category} data-service={data.service} data-code={dispCode ?? ''} data-benefit={dispBenefit} data-sort-yen={data.sortYen ?? 0}>
   <div class="card-tags">
     <span class="card-tag">{CATEGORY_NAMES[data.category] ?? data.category}</span>
     {data.badge && <span class="card-tag card-tag-accent">{data.badge}</span>}
@@ -35,7 +41,7 @@ const imgSize = data.image ? IMG_DIMS[data.image] : undefined;
   <p class="desc">{data.description}</p>
   <div class="benefit-badge">
     <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 15.92 8H20v6z"/></svg></span><span class="benefit-label">登録者特典</span>
-    <span class="benefit-value">{data.benefit}</span>
+    <span class="benefit-value">{dispBenefit}</span>
     {data.benefitSub && <span class="benefit-sub">{data.benefitSub}</span>}
   </div>
   {data.points && (
@@ -43,10 +49,10 @@ const imgSize = data.image ? IMG_DIMS[data.image] : undefined;
       {data.points.map((p) => <li>{p}</li>)}
     </ul>
   )}
-  {data.code ? (
+  {dispCode ? (
     <div class="code-row">
-      <code>{data.code}</code>
-      <button class="copy-btn" type="button" data-copy={data.code} data-service={slug}>
+      <code>{dispCode}</code>
+      <button class="copy-btn" type="button" data-copy={dispCode} data-service={slug}>
         <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="copy-label">コピー</span>
       </button>
     </div>
@@ -56,8 +62,8 @@ const imgSize = data.image ? IMG_DIMS[data.image] : undefined;
   {showBody && <Content />}
   <p class="original-link"><a href={`/mea-code-matome/articles/${slug}/`}>紹介文（原文）・条件の全文を見る →</a></p>
   {data.conditions && <p class="conditions">{data.conditions}</p>}
-  {data.url ? (
-    <a class="register-btn" href={data.url} target="_blank" rel="sponsored noopener" data-service={slug} data-position={ctaPosition}>
+  {dispUrl ? (
+    <a class="register-btn" href={dispUrl} target="_blank" rel="sponsored noopener" data-service={slug} data-position={ctaPosition} data-ref-service={slug} data-ref-placement={ctaPosition}>
       無料で登録する
     </a>
   ) : data.officialSite ? (

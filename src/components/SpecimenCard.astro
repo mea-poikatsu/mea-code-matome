@@ -1,0 +1,79 @@
+---
+// S08 招待コード図鑑の標本カード。図鑑の標本ラベルのように、通し番号・分類・特典・コード・確認日を
+// 均等な体裁で並べるための専用カード。表示する事実（特典・コード・紹介URL・確認日）は
+// 正本（services-data.json）を優先する。
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORY_NAMES, slugOf } from '../data/site';
+import { factsOf } from '../data/services';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+  /** 図鑑の通し番号（MATOME_ORDER＝おすすめ順の位置） */
+  no: number;
+  /** 特典額順の並べ替えキー（円換算の編集値） */
+  yen: number;
+}
+
+const { article, no, yen } = Astro.props;
+const { data } = article;
+const slug = slugOf(article.id);
+const facts = factsOf(slug);
+const name = facts?.name ?? data.service;
+const benefit = facts?.benefit ?? data.benefit;
+const code = facts ? facts.code : data.code;
+const friendCode = facts?.friendCode ?? null;
+const url = facts ? facts.url : data.url;
+const officialSite = facts ? facts.officialSite : data.officialSite;
+const verified = facts?.verified;
+const articleUrl = `/mea-code-matome/articles/${slug}/`;
+const noLabel = `No.${String(no).padStart(2, '0')}`;
+---
+
+<article class="specimen" data-category={data.category} data-no={no} data-yen={yen}>
+  <div class="specimen-head">
+    <span class="specimen-no">{noLabel}</span>
+    <span class="specimen-cat">{CATEGORY_NAMES[data.category] ?? data.category}</span>
+  </div>
+  <h3 class="specimen-name"><a href={articleUrl}>{name}</a></h3>
+  <p class="specimen-benefit">
+    <span class="specimen-benefit-label">登録者特典</span>
+    <strong>{benefit}</strong>
+  </p>
+  {code ? (
+    <div class="specimen-code-box">
+      <span class="specimen-code-label">招待コード</span>
+      <div class="specimen-code-row">
+        <code>{code}</code>
+        <button class="copy-btn" type="button" data-copy={code} data-service={slug}>
+          <span class="copy-label">コピー</span>
+        </button>
+      </div>
+      {friendCode && (
+        <div class="specimen-code-row specimen-code-row-sub">
+          <span class="specimen-code-label">友達招待コード</span>
+          <code>{friendCode}</code>
+          <button class="copy-btn" type="button" data-copy={friendCode} data-service={slug}>
+            <span class="copy-label">コピー</span>
+          </button>
+        </div>
+      )}
+    </div>
+  ) : (
+    <p class="specimen-nocode">コードなし（リンク型）</p>
+  )}
+  {verified && <p class="specimen-verified">最終確認：{verified}</p>}
+  <div class="specimen-foot">
+    <a class="specimen-detail" href={articleUrl}>標本の詳細を見る →</a>
+    {url ? (
+      <a class="register-btn" href={url} target="_blank" rel="sponsored noopener" data-service={slug} data-position="specimen" data-ref-service={slug} data-ref-placement="specimen">
+        無料で登録する
+      </a>
+    ) : officialSite ? (
+      <a class="register-btn" href={officialSite} target="_blank" rel="noopener" data-service={slug} data-position="specimen">
+        公式サイトを見る
+      </a>
+    ) : (
+      <p class="specimen-codeonly">コードのみの紹介です</p>
+    )}
+  </div>
+</article>

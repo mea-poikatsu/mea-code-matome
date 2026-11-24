@@ -6,7 +6,7 @@ export const SITE = {
   siteUrl: 'https://mea-poikatsu.github.io/mea-code-matome',
   description:
     'ポイ活の紹介コード・招待コードを19サービス分まとめて掲載。ワラウ最大2,500pt、ハピタス最大2,300P、モッピー最大7,000P、TikTok・TikTok Lite、PayPay、メルカリ、エアウォレット、楽天モバイル、オリくじ、ポケカツ、Freecash、SMBC Olive、Muse、サンポ、ぶたまる、ミラポイ、トクエル、dipsファームの特典・条件・紹介リンクを一覧で比較。コードはコピーボタンでそのまま使えます。',
-  dateModified: '2026-11-21',
+  dateModified: '2026-11-25',
   gaMeasurementId: 'G-8BB8V3DRW8',
   xAccount: 'https://x.com/pppppuririn',
   hubUrl:
