@@ -68,6 +68,7 @@ const organizationLd = {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet" />
+    <script>(function(){try{var t=localStorage.getItem('poigame-theme');if(t!=='dark'&&t!=='light'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
   </head>
   <body>
     <header class="site-header">
@@ -81,6 +82,7 @@ const organizationLd = {
           <a href="/mea-code-matome/#faq">よくある質問</a>
           <a href="/mea-code-matome/search/">検索</a>
           <a href="/mea-code-matome/faq/">よくある質問</a>
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="表示テーマを切り替える">🌙 テーマ</button>
         </nav>
       </div>
     </header>
@@ -174,6 +176,24 @@ const organizationLd = {
           wrap.appendChild(t);
         }
       });
+    </script>
+    <script>
+      // テーマ切替ボタン（PARTS_SPEC §18 テーマ基盤：キーは poigame-theme に統一）
+      (() => {
+        const btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        const draw = () => {
+          const cur = document.documentElement.getAttribute('data-theme') || 'light';
+          btn.textContent = cur === 'dark' ? '☀️ テーマ' : '🌙 テーマ';
+        };
+        draw();
+        btn.addEventListener('click', () => {
+          const next = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('poigame-theme', next); } catch {}
+          draw();
+        });
+      })();
     </script>
   </body>
 </html>

@@ -529,3 +529,81 @@ h1, .brand { font-weight: 900; }
 .specimen-foot { display: flex; flex-direction: column; gap: 10px; }
 .specimen-detail { font-size: var(--text-sm); font-weight: 700; }
 .specimen-codeonly { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; }
+
+/* === テーマ切替ボタン（段4 S08 横展開・PARTS_SPEC §18） === */
+.theme-toggle {
+  border: 1px solid var(--color-primary-line); background: var(--color-surface);
+  color: var(--color-primary-strong); border-radius: var(--radius-pill);
+  padding: 6px 12px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  font-family: inherit; line-height: 1.4; white-space: nowrap;
+}
+.theme-toggle:hover { background: var(--color-primary-soft); }
+
+/* === ダークテーマ（段4 S08 横展開・PARTS_SPEC §18：本体CSSは触らず上書きのみ。
+   標本（specimen）系の固有CSSにはレイアウト面で触れず、色だけの上書きに留める） === */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  background: #161013;
+  --color-bg: #161013;
+  --color-surface: #251a20;
+  --color-surface-raised: #2e2129;
+  --color-text: #f2e9ec;
+  --color-text-muted: #c9aeb9;
+  --color-primary: #f27ba7;
+  --color-primary-strong: #f78fb8;
+  --color-primary-dark: #ffa4c8;
+  --color-primary-soft: #33202a;
+  --color-primary-line: #503243;
+  --color-benefit-bg: #33202a;
+  --color-benefit-text: #ffa4c8;
+  --color-notice-bg: #332a12;
+  --color-notice-line: #6b5518;
+  --color-success-bg: #14301f;
+  --color-success-text: #8fd7a4;
+  --color-error-bg: #3a1a16;
+  --color-error-text: #ff9d94;
+  --color-board: #c3aef0;
+  --color-focus: #f48fb1;
+  --shadow-card: 0 1px 3px rgba(0,0,0,.5);
+  --shadow-raised: 0 4px 14px rgba(0,0,0,.55);
+  --shadow-card-hover: 0 12px 28px rgba(0,0,0,.6);
+  --shadow-btn: 0 3px 10px rgba(0,0,0,.5);
+  --shadow-header: 0 2px 14px rgba(0,0,0,.5);
+  --gradient-brand: linear-gradient(100deg, #f7a8c4 0%, #f27ba7 48%, #e75480 100%);
+  --gradient-hero: linear-gradient(168deg, #2a1a21 0%, #221318 55%, #1c1016 100%);
+  --gradient-badge: linear-gradient(135deg, #33202a 0%, #2b1a23 100%);
+  --gradient-soft: linear-gradient(180deg, #251a20 0%, #1d1419 100%);
+  /* --gradient-primary / --gradient-primary-hover は現行維持（白文字のコントラスト確保済み） */
+}
+html[data-theme="dark"] .site-header { background: linear-gradient(#1d1419, #1d1419) padding-box, var(--gradient-brand) border-box; }
+html[data-theme="dark"] .site-footer { background: linear-gradient(180deg, #1d1419, #161013) padding-box, var(--gradient-brand) border-box; }
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .stats .stat,
+html[data-theme="dark"] .link-card,
+html[data-theme="dark"] .featured-benefit,
+html[data-theme="dark"] .card-tag-accent { background: var(--color-surface); }
+html[data-theme="dark"] .filter-chips .chip,
+html[data-theme="dark"] .search-box input,
+html[data-theme="dark"] .sort-label select { background: var(--color-surface-raised); }
+html[data-theme="dark"] .search-box input::placeholder { color: var(--color-text-muted); }
+html[data-theme="dark"] .article-end-cta { background: linear-gradient(#251a20, #1d1419) padding-box, var(--gradient-brand) border-box; }
+html[data-theme="dark"] .mea-speech .speech-body,
+html[data-theme="dark"] .mea-speech .speech-body::before { background: var(--color-surface); }
+html[data-theme="dark"] th { background: linear-gradient(180deg, #33202a, #2b1a23); }
+html[data-theme="dark"] .ranking-table thead th { background: #33202a; }
+html[data-theme="dark"] tbody tr:nth-child(even) { background: #1f151a; }
+html[data-theme="dark"] tbody tr:hover { background: #2c1c24; }
+html[data-theme="dark"] .copy-btn:hover { background: #3d2431; }
+html[data-theme="dark"] ::selection { background: #7a2b50; }
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .benefit-badge { border-color: var(--color-primary-line); }
+html[data-theme="dark"] .service-card .badge { background: var(--color-primary-soft); }
+html[data-theme="dark"] .pr-box { background: var(--color-notice-bg); border-color: var(--color-notice-line); }
+/* --color-primary-dark は .register-btn:hover の地としても使うため、ダーク側はグラデーションへ寄せて白文字を守る */
+html[data-theme="dark"] .register-btn:hover { background: var(--gradient-primary-hover); }
+html[data-theme="dark"] .theme-toggle { background: var(--color-surface-raised); }
+html[data-theme="dark"] .theme-toggle:hover { background: var(--color-primary-soft); }
+/* 白文字の保護（S02 と同じ考え方）：トークンを明るくすると白文字が落ちるため、地はダーク側だけ固定する */
+html[data-theme="dark"] .empty-state button { background: #c2185b; }
+/* 標本カードの色だけの上書き（体裁・均等配置には触れない）：コード箱の直書き地をダークの持ち上げ面へ */
+html[data-theme="dark"] .specimen-code-box { background: var(--color-surface-raised); }
